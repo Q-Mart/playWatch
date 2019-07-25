@@ -2,3 +2,5 @@ sounddevice
 numpy
 matplotlib
 scipy
+pyqtgraph
+pyqt5
