@@ -26,17 +26,17 @@ class Terrain(object):
         self.offset = 0
 
         # Colours to match the ENSWBL asthetic
-        self.startR = 95.2 / 255
-        self.startG = 0.6 / 255
-        self.startB = 59.9 / 255
+        self.startR = 0.2
+        self.startG = 0.2
+        self.startB = 0.2
 
-        self.endR = 93.7 / 255
-        self.endG = 58 / 255
-        self.endB = 63.1 / 255
+        self.endR = 96.4 / 255
+        self.endG = 0 / 255
+        self.endB = 100 / 255
 
-        self.rStep = (self.endR - self.startR) / 40
-        self.gStep = (self.endG - self.startG) / 40
-        self.bStep = (self.endB - self.startB) / 40
+        self.rStep = (self.endR - self.startR) / 20
+        self.gStep = (self.endG - self.startG) / 20
+        self.bStep = (self.endB - self.startB) / 20
 
         self.open_simplex = OpenSimplex()
 
@@ -62,8 +62,8 @@ class Terrain(object):
             vertexes=verts,
             faces=faces,
             faceColors=colours,
-            smooth=False,
-            drawEdges=True
+            smooth=True,
+            drawEdges=False
         )
 
         self.mesh1.setGLOptions('additive')
@@ -76,20 +76,31 @@ class Terrain(object):
             ] for n, x in enumerate(self.xpoints) for m, y in enumerate(self.ypoints)
         ], dtype=np.float32)
 
+        # verts = np.array([
+        #     [
+        #         x, y, 0
+        #     ] for n, x in enumerate(self.xpoints) for m, y in enumerate(self.ypoints)
+        # ], dtype=np.float32)
+
+        r = self.startR
+        g = self.startG
+        b = self.startB
+
         faces = []
         colours = []
         for m in range(self.nfaces - 1):
             yoff = m * self.nfaces
-            col = [self.startR + self.rStep,
-                   self.startG + self.gStep,
-                   self.startB + self.bStep,
-                   1]
+
+            r += self.rStep
+            g += self.gStep
+            b += self.bStep
+            col = [r, g, b, 1]
+
             for n in range(self.nfaces - 1):
                 faces.append([n + yoff, yoff + n + self.nfaces, yoff + n + self.nfaces + 1])
                 faces.append([n + yoff, yoff + n + 1, yoff + n + self.nfaces + 1])
                 # colours.append([n / self.nfaces, 1 - n / self.nfaces, m / self.nfaces, 0.7])
                 # colours.append([n / self.nfaces, 1 - n / self.nfaces, m / self.nfaces, 0.7])
-
 
                 colours.append(col)
                 colours.append(col)
