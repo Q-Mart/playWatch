@@ -4,3 +4,5 @@ matplotlib
 scipy
 pyqtgraph
 pyqt5
+pyopengl
+opensimplex
