@@ -123,7 +123,7 @@ class Terrain(object):
     def animation(self):
         timer = QtCore.QTimer()
         timer.timeout.connect(self.update)
-        timer.start(10)
+        timer.start(33)
         self.start()
         self.update()
 
