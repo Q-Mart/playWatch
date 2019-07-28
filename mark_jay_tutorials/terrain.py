@@ -76,12 +76,6 @@ class Terrain(object):
             ] for n, x in enumerate(self.xpoints) for m, y in enumerate(self.ypoints)
         ], dtype=np.float32)
 
-        # verts = np.array([
-        #     [
-        #         x, y, 0
-        #     ] for n, x in enumerate(self.xpoints) for m, y in enumerate(self.ypoints)
-        # ], dtype=np.float32)
-
         r = self.startR
         g = self.startG
         b = self.startB
